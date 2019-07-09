@@ -22,6 +22,7 @@ class DecimalField extends FloatField {
 
 		$this->update_messages(array(
 			"max_digits" => _("Ensure this number has at most %max% digits (it has %digits% including allowed decimal places)."),
+			"max_integers" => _("Ensure this number has at most %max% digits in integer-part (it has %integers%)."),
 			"decimal_places" => _("Ensure this number has at most %max% decimal places (it has %decimal_places%)."),
 		));
 
@@ -32,20 +33,23 @@ class DecimalField extends FloatField {
 	}
 
 	function clean($value){
-		$value = preg_replace('/\s/','',$value);
-		if(!preg_match('/^[+-]?([1-9]\d*)(|\.(\d*))$/',$value,$matches)){
-			return parent::clean($value);
+		list($err,$value) = parent::clean($value);
+		if(!is_null($err) || is_null($value)){
+			return array($err,null);
 		}
-		$part1 = $matches[1];
+		$value = (string)$value;
+		preg_match('/^[+-]?([1-9]\d*)(|\.(\d*))$/',$value,$matches);
+		$integers = $matches[1];
 		$decimals = isset($matches[3]) ? $matches[3] : "";
-		$decimals = preg_replace('/0+$/','',$decimals);
+		$decimals = preg_replace('/0+$/','',$decimals); // "102300" -> "1023"
+		$digits = strlen($integers) + strlen($decimals);
 
-		$max_digits = $this->max_digits;
-		if(!is_null($max_digits)){
-			$max_digits = $max_digits - $this->decimal_places;
+		if(!is_null($this->max_digits) && $digits>$this->max_digits){
+			return array(strtr($this->messages["max_digits"],array("%max%" => $this->max_digits, "%digits%" => strlen($integers) + strlen($decimals))),null);
 		}
-		if(!is_null($max_digits) && strlen($part1)>$max_digits){
-			return array(strtr($this->messages["max_digits"],array("%max%" => $this->max_digits, "%digits%" => strlen($part1) + $this->decimal_places)),null);
+
+		if(!is_null($this->max_digits) && strlen($integers)>$this->max_digits-$this->decimal_places){
+			return array(strtr($this->messages["max_integers"],array("%max%" => $this->max_digits-$this->decimal_places, "%integers%" => strlen($integers))),null);
 		}
 
 		if(isset($this->decimal_places) && strlen($decimals)>$this->decimal_places){

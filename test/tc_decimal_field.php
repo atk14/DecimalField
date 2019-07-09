@@ -26,10 +26,10 @@ class TcDecimalField extends TcBase {
 		$this->assertEquals("This field is required.",$msg);
 
 		$msg = $this->assertInvalid("12345");
-		$this->assertEquals("Ensure this number has at most 7 digits (it has 9 including allowed decimal places).",$msg);
+		$this->assertEquals("Ensure this number has at most 3 digits in integer-part (it has 5).",$msg);
 
 		$msg = $this->assertInvalid("1234.567");
-		$this->assertEquals("Ensure this number has at most 7 digits (it has 8 including allowed decimal places).",$msg);
+		$this->assertEquals("Ensure this number has at most 3 digits in integer-part (it has 4).",$msg);
 
 		$msg = $this->assertInvalid("1.45678");
 		$this->assertEquals("Ensure this number has at most 4 decimal places (it has 5).",$msg);
