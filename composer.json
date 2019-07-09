@@ -1,0 +1,22 @@
+{
+        "name": "atk14/decimal-field",
+        "type": "library",
+        "description": "Field for number with restricted count of digits and decimal places",
+        "keywords": ["decimal", "decimals", "float", "field", "forms", "atk14"],
+        "homepage": "https://github.com/atk14/DecimalField",
+        "license": ["MIT"],
+        "authors": [
+                {
+                        "name": "ATK14 Development Team",
+                        "homepage": "https://github.com/orgs/atk14/people"
+                }
+        ],
+        "require": {
+                "php": ">=5.3.0"
+        },
+        "require-dev": {
+        },
+        "autoload": {
+                "classmap": ["src/app/fields"]
+        }
+}
