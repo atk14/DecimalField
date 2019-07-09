@@ -28,7 +28,7 @@ In a form:
       }
     }
 
-Cleaned values of this field could be: "1.23", "-1.23", "1.20", "4.00"...
+Cleaned values from this field could be: "1.23", "1.20", "4.00"... (strings)
 
 Option ```"format_number" => false``` can be used when it is required to get floats form the DecimalField:
 
@@ -36,9 +36,10 @@ Option ```"format_number" => false``` can be used when it is required to get flo
        "label" => "Weight in kg",
        "max_digits" => 6,
        "decimal_places" => 3,
-       "min_value" => 0,
        "format_number" => false,
     ]));
+
+Cleaned values from such field could be: 1.23, 1.2, 4... (floats)
 
 Installation
 ------------
@@ -60,7 +61,7 @@ At the moment testing is not possible in this project itself. DecimalField is on
 
 
     cd path/to/your/atk14/project/test/fields/
-    ../../scripts/run_unit_tests tc_zip_field
+    ../../scripts/run_unit_tests tc_number_field
 
 It is expected that class TcBase exists in file test/fields/tc_base.php and is descendant of TcAtk14Field. Perfect example of that file is at https://github.com/atk14/Atk14Skelet/blob/master/test/fields/tc_base.php
 
