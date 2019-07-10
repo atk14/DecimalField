@@ -3,9 +3,7 @@ DecimalField
 
 Field for number with restricted count of digits and decimal places.
 
-DecimalField is ideal for e.g. entering pricing.
-
-DecimalField does not provide number localization. It means that dot (".") is only valid separator for the decimal point.
+DecimalField is ideal for e.g. entering prices.
 
 Usage in a ATK14 application
 ----------------------------
@@ -28,18 +26,18 @@ In a form:
       }
     }
 
-Cleaned values from this field could be: "1.23", "1.20", "4.00"... (strings)
+Cleaned values from this field could be: 1.23, 1.2, 4.0... (floats)
 
-Option ```"format_number" => false``` can be used when it is required to get floats form the DecimalField:
+Option ```"format_number" => true``` can be used when it is required to get string values from the DecimalField:
 
     $this->add_field("weight", new DecimalField([
        "label" => "Weight in kg",
        "max_digits" => 6,
        "decimal_places" => 3,
-       "format_number" => false,
+       "format_number" => true,
     ]));
 
-Cleaned values from such field could be: 1.23, 1.2, 4... (floats)
+Cleaned values from such field could be: "1.230", "1.200", "4.000"... (string)
 
 Installation
 ------------

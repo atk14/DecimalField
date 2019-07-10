@@ -11,7 +11,7 @@ class DecimalField extends FloatField {
 			"max_digits" => null,
 			"decimal_places" => null,
 
-			"format_number" => true, // whether or not format output value using number_format() function; if it set to false, a float value is returned
+			"format_number" => false, // whether or not format output value using number_format() function; if it set to true, a string value is returned
 		);
 
 		$this->max_digits = $options["max_digits"];
@@ -28,8 +28,10 @@ class DecimalField extends FloatField {
 
 	}
 
-	function format_initial_data($data){
-		return $this->_numberFormat($data);
+	function format_initial_data($value){
+		$value = $this->_numberFormat($value);
+		$value = preg_replace('/\.(\d+?)0*$/','.\1',$value); // "12.340" -> "12.34"; "12.000" -> "12.0"
+		return $value;
 	}
 
 	function clean($value){
@@ -58,13 +60,15 @@ class DecimalField extends FloatField {
 
 		list($err,$value) = parent::clean($value);
 
-		$value = $this->_numberFormat($value);
+		if($this->format_number){
+			$value = $this->_numberFormat($value);
+		}
 
 		return array($err,$value);
 	}
 
 	protected function _numberFormat($value){
-		if($this->format_number && !is_null($value) && !is_null($this->decimal_places)){
+		if(!is_null($value) && !is_null($this->decimal_places)){
 			return number_format($value,$this->decimal_places,".","");
 		}
 		return $value;
