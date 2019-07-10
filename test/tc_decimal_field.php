@@ -50,5 +50,9 @@ class TcDecimalField extends TcBase {
 		$this->assertTrue("12.1"===$field->format_initial_data(12.1));
 		$this->assertTrue("12.0"===$field->format_initial_data(12));
 		$this->assertTrue("-12.0"===$field->format_initial_data(-12));
+		$this->assertTrue(""===$field->format_initial_data(""));
+		$this->assertTrue(""===$field->format_initial_data(null));
+		$this->assertTrue("nonsence"===$field->format_initial_data("nonsence"));
+		$this->assertTrue("nonsence"===$field->format_initial_data(" nonsence "));
 	}
 }
