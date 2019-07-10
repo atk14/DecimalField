@@ -4,6 +4,7 @@ class TcDecimalField extends TcBase {
 	function test(){
 		$lang = "en";
 		Atk14Locale::Initialize($lang);
+		$this->assertEquals("en",$lang);
 
 		$this->field = new DecimalField(array("max_digits" => 7, "decimal_places" => 4));
 
@@ -44,7 +45,6 @@ class TcDecimalField extends TcBase {
 		$this->assertTrue("123.400"===$number);
 
 		// -- formatting initial value
-
 		$field = new DecimalField(array("max_digits" => 6, "decimal_places" => 3, "initial" => 12.3));
 		$this->assertTrue("12.123"===$field->format_initial_data(12.123));
 		$this->assertTrue("12.1"===$field->format_initial_data(12.1));
@@ -53,6 +53,6 @@ class TcDecimalField extends TcBase {
 		$this->assertTrue(""===$field->format_initial_data(""));
 		$this->assertTrue(""===$field->format_initial_data(null));
 		$this->assertTrue("nonsence"===$field->format_initial_data("nonsence"));
-		$this->assertTrue("nonsence"===$field->format_initial_data(" nonsence "));
+		$this->assertTrue(" nonsence "===$field->format_initial_data(" nonsence "));
 	}
 }

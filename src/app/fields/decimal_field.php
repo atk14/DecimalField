@@ -29,10 +29,14 @@ class DecimalField extends FloatField {
 	}
 
 	function format_initial_data($value){
-		$value = (string)$value;
-		$value = trim($value);
-		if(!preg_match('/^[-+]?\d+(\.\d*|)$/',$value)){ return $value; }
+		if(!strlen($value)){ return ""; }
+		$orig_value = $value;
+
 		$value = (float)$value;
+		if((string)$orig_value!==(string)$value){
+			return $orig_value;
+		}
+
 		$value = $this->_numberFormat($value);
 		$value = preg_replace('/\.(\d+?)0*$/','.\1',$value); // "12.340" -> "12.34"; "12.000" -> "12.0"
 		return $value;
