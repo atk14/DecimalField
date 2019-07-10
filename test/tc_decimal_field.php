@@ -2,9 +2,11 @@
 class TcDecimalField extends TcBase {
 
 	function test(){
-		$lang = "en";
-		Atk14Locale::Initialize($lang);
-		$this->assertEquals("en",$lang);
+		if(class_exists("Atk14Locale")){
+			$lang = "en";
+			Atk14Locale::Initialize($lang);
+			$this->assertEquals("en",$lang);
+		}
 
 		$this->field = new DecimalField(array("max_digits" => 7, "decimal_places" => 4));
 
