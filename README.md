@@ -47,21 +47,16 @@ Just use the Composer:
     cd path/to/your/atk14/project/
     composer require atk14/decimal-field dev-master
 
-Optionally you can symlink the DecimalField files into your project:
+Optionally you can symlink the DecimalField file into your project:
 
     ln -s ../../vendor/atk14/decimal-field/src/app/fields/decimal_field.php app/fields/decimal_field.php
-    ln -s ../../vendor/atk14/decimal-field/test/tc_decimal_field.php test/fields/tc_decimal_field.php
 
 Testing
 -------
 
-At the moment testing is not possible in this project itself. DecimalField is only testable in an ATK14 project:
-
-
-    cd path/to/your/atk14/project/test/fields/
-    ../../scripts/run_unit_tests tc_number_field
-
-It is expected that class TcBase exists in file test/fields/tc_base.php and is descendant of TcAtk14Field. Perfect example of that file is at https://github.com/atk14/Atk14Skelet/blob/master/test/fields/tc_base.php
+    composer update --dev
+    cd test
+    ../vendor/bin/run_unit_tests
 
 License
 -------
