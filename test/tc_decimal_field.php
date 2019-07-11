@@ -31,6 +31,16 @@ class TcDecimalField extends TcBase {
 		$msg = $this->assertInvalid("1.45678");
 		$this->assertEquals("Ensure this number has at most 4 decimal places (it has 5).",$msg);
 
+		// spaces are removed automatically
+		$this->field = new DecimalField(array("max_digits" => 7, "decimal_places" => 3));
+
+		$number = $this->assertValid("1 234.567");
+		$this->assertTrue(1234.567===$number);
+
+		$nbsp = html_entity_decode("&nbsp;");
+		$number = $this->assertValid("1{$nbsp}234.567");
+		$this->assertTrue(1234.567===$number);
+
 		// -- enabling format_number option
 		$this->field = new DecimalField(array("max_digits" => 6, "decimal_places" => 3, "format_number" => true));
 
