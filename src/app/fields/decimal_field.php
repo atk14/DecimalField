@@ -43,6 +43,9 @@ class DecimalField extends FloatField {
 	}
 
 	function clean($value){
+		$value = preg_replace('/\s/','',$value); // "123 456" -> "123456"
+		$value = str_replace(html_entity_decode("&nbsp;"),"",$value);
+
 		list($err,$value) = parent::clean($value);
 		if(!is_null($err) || is_null($value)){
 			return array($err,null);
