@@ -31,6 +31,15 @@ class TcDecimalField extends TcBase {
 		$msg = $this->assertInvalid("1.45678");
 		$this->assertEquals("Ensure this number has at most 4 decimal places (it has 5).",$msg);
 
+		$number = $this->assertValid("0.12");
+		$this->assertTrue(0.12===$number);
+
+		$number = $this->assertValid("+0.13");
+		$this->assertTrue(0.13===$number);
+
+		$number = $this->assertValid("-0.14");
+		$this->assertTrue(-0.14===$number);
+
 		$number = $this->assertValid("0");
 		$this->assertTrue(0.0===$number);
 
@@ -55,6 +64,15 @@ class TcDecimalField extends TcBase {
 
 		$number = $this->assertValid("123.40");
 		$this->assertTrue("123.400"===$number);
+
+		$number = $this->assertValid("0.12");
+		$this->assertTrue("0.120"===$number);
+
+		$number = $this->assertValid("+0.13");
+		$this->assertTrue("0.130"===$number);
+
+		$number = $this->assertValid("-0.14");
+		$this->assertTrue("-0.140"===$number);
 
 		$number = $this->assertValid("0");
 		$this->assertTrue("0.000"===$number);
