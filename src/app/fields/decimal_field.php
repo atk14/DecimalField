@@ -51,7 +51,7 @@ class DecimalField extends FloatField {
 			return array($err,null);
 		}
 		$value = (string)$value;
-		preg_match('/^[+-]?([1-9]\d*)(|\.(\d*))$/',$value,$matches);
+		preg_match('/^[+-]?([1-9]\d*|0)(|\.(\d*))$/',$value,$matches);
 		$integers = $matches[1];
 		$decimals = isset($matches[3]) ? $matches[3] : "";
 		$decimals = preg_replace('/0+$/','',$decimals); // "102300" -> "1023"
