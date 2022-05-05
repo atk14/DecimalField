@@ -29,7 +29,7 @@ class DecimalField extends FloatField {
 	}
 
 	function format_initial_data($value){
-		if(!strlen($value)){ return ""; }
+		if(!strlen((string)$value)){ return ""; }
 		$orig_value = $value;
 
 		$value = (float)$value;
