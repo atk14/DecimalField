@@ -45,7 +45,7 @@ Installation
 Just use the Composer:
 
     cd path/to/your/atk14/project/
-    composer require atk14/decimal-field dev-master
+    composer require atk14/decimal-field
 
 Optionally you can symlink the DecimalField file into your project:
 
