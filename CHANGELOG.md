@@ -3,6 +3,11 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+[1.0.3] 2024-07-18
+------------------
+
+* d5ad9d7 - DecimalField's attributes declaration
+
 [1.0.2] 2022-05-05
 ------------------
 
