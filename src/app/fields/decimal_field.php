@@ -6,6 +6,10 @@
  */
 class DecimalField extends FloatField {
 
+	var $max_digits;
+	var $decimal_places;
+	var $format_number;
+
 	function __construct($options = array()){
 		$options += array(
 			"max_digits" => null,
